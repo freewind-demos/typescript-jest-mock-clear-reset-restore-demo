@@ -1,7 +1,7 @@
-TypeScript Jest Demo
-===========================
+TypeScript Jest Mock clear/reset/restore Demo
+==============================================
 
-使用typescript就需要在`jest.config.js`中使用`ts-jest`作为`preset`
+弄清楚`mockClear`, `mockReset`, `mockRestore` 三者之间的区别
 
 ```
 npm install
