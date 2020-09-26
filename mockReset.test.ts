@@ -1,26 +1,28 @@
-describe('when calling mockReset()', () => {
-  it('on a spy with custom implementation, it replaces the implementation to a new undefined-returning mock fn', () => {
+describe('mockReset', () => {
+  describe('spy', () => {
     const module = {api: () => 'actual'}
-    jest.spyOn(module, 'api').mockImplementation(() => 'spy mocked');
+    it('clears implementation, clears calls', () => {
+      jest.spyOn(module, 'api').mockImplementation(() => 'spy mocked');
 
-    expect(module.api()).toBe('spy mocked');
-    expect(module.api).toHaveBeenCalledTimes(1);
+      expect(module.api()).toBe('spy mocked');
+      expect(module.api).toHaveBeenCalledTimes(1);
 
-    (module.api as any).mockReset();
+      (module.api as any).mockReset();
 
-    expect(module.api()).toBe(undefined)
-    expect(module.api).toHaveBeenCalledTimes(1)
+      expect(module.api()).toBe(undefined)
+      expect(module.api).toHaveBeenCalledTimes(1)
+    })
   })
-
-  it('on a non-spy with custom implementation, it replaces the implementation to a new undefined-returning mock fn', () => {
+  describe('mock', () => {
     const api = jest.fn(() => 'non-spy mocked');
+    it('clears implementation, clears calls', () => {
+      expect(api()).toBe('non-spy mocked');
+      expect(api).toHaveBeenCalledTimes(1);
 
-    expect(api()).toBe('non-spy mocked');
-    expect(api).toHaveBeenCalledTimes(1);
+      api.mockReset();
 
-    (api as any).mockReset();
-
-    expect(api()).toBe(undefined);
-    expect(api).toHaveBeenCalledTimes(1);
+      expect(api()).toBe(undefined);
+      expect(api).toHaveBeenCalledTimes(1);
+    })
   })
 })
