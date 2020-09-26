@@ -1,7 +1,7 @@
 import asMock from "./asMock";
 import hello from "./hello";
 
-jest.mock('./hello', () => jest.fn());
+jest.mock('./hello');
 
 describe('mockRestore', () => {
 
