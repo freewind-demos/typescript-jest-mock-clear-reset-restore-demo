@@ -9,8 +9,10 @@ TypeScript Jest Mock clear/reset/restore Demo
 
 |      | mockClear | mockReset          | mockRestore         |ª
 |------|-----------|--------------------|---------------------|
-| spy  | keep      | clear to undefined | restore to original |
-| mock | keep      | clear to undefined | clear to undefined  |
+| spy  | keep      | clear              | restore to original |
+| mock | keep      | clear              | clear               |
+
+这里"clear"的意思是说，它会把自定义implementation一个返回简单的`() => undefined`函数。
 
 ```
 npm install

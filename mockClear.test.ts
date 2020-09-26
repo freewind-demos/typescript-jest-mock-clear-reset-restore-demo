@@ -1,3 +1,8 @@
+import hello from "./hello";
+import asMock from "./asMock";
+
+jest.mock('./hello', () => jest.fn());
+
 describe('mockClear', () => {
   describe('spy', () => {
     const module = {api: () => 'actual'}
@@ -16,16 +21,17 @@ describe('mockClear', () => {
   })
 
   describe('mock', () => {
-    const api = jest.fn(() => 'non-spy mocked');
-
+    const mockHello = asMock(hello);
     it('keeps implementation, clears calls', () => {
-      expect(api()).toBe('non-spy mocked');
-      expect(api).toHaveBeenCalledTimes(1);
+      mockHello.mockImplementation((a) => a.toUpperCase());
 
-      api.mockClear();
+      expect(mockHello('aaa')).toBe('AAA');
+      expect(mockHello).toHaveBeenCalledTimes(1);
 
-      expect(api()).toBe('non-spy mocked');
-      expect(api).toHaveBeenCalledTimes(1);
+      mockHello.mockClear();
+
+      expect(mockHello('aaa')).toBe('AAA');
+      expect(mockHello).toHaveBeenCalledTimes(1);
     })
   })
 })
